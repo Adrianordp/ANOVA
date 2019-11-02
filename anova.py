@@ -11,5 +11,9 @@ filePath = root+fileName
 
 # Begin logic
 with open(filePath) as outfile:
-    dados = outfile.read()
+    dados = outfile.read().split(' ')
     print(dados)
+    if '\n' in dados[1]:
+        print('tem')
+    else:
+        print('não tem')
