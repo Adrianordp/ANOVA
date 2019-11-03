@@ -1,7 +1,8 @@
 # Code beginning --------------------
-import csv
 import sys
 import os
+import csv
+import numpy as np
 
 # get file root
 root = os.path.dirname(os.path.abspath(__file__)) + '/'
@@ -9,27 +10,29 @@ root = os.path.dirname(os.path.abspath(__file__)) + '/'
 fileName  = sys.argv[1]
 # Create file path
 filePath = root+fileName
+with open(filePath, 'r') as f:
+    reader = csv.reader(f, delimiter=',')
+    # get header from first row
+    headers = next(reader)
+    # get all the rows as a list
+    data = list(reader)
+    # transform data into numpy array
+    data = np.array(data).astype(float)
 
-fields = []
-rows = []
-
-# Begin logic
-with open(filePath,'r') as outfile:
-    dados = csv.reader(outfile)
-    fields = csvreader.next();
-    for row in csvreader:
-        rows.append(row)
-
-    # get total number of rows
-    print("Total no. of rows: %d"%(csvreader.line_num))
-
-# printing the field names 
-print('Field names are:' + ', '.join(field for field in fields))
-
-#  printing first 5 rows
-print('\nFirst 5 rows are:\n')
-for row in rows[:5]:
-    # parsing each column of a row
-    for col in row:
-        print("%10s"%col),
-    print('\n')
+print(headers)
+print(data.shape)
+print(data)
+x = data[:,0]
+y = data[:,1]
+z = data[:,2]
+print('Médias locais:', end = ' ')
+print(np.mean(x), end = ' ')
+print(np.mean(y), end = ' ')
+print(np.mean(z))
+print('Covariâncias:', end = ' ')
+print(np.cov(x), end = ' ')
+print(np.cov(y), end = ' ')
+print(np.cov(z))
+print('Média global:', end = ' ')
+print(np.mean(data))
+# print(np.sum(x**2))
