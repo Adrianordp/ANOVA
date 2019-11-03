@@ -1,13 +1,15 @@
+#!/usr/bin/python3
 # Code beginning --------------------
-import sys
 import os
 import csv
 import numpy as np
+import tkinter as tk
 
 # get file root
 root = os.path.dirname(os.path.abspath(__file__)) + '/'
 # Recieve file name
-fileName  = sys.argv[1]
+# fileName  = sys.argv[1]
+fileName = 'data.csv'
 # Create file path
 filePath = root+fileName
 with open(filePath, 'r') as f:
@@ -19,20 +21,69 @@ with open(filePath, 'r') as f:
     # transform data into numpy array
     data = np.array(data).astype(float)
 
-print(headers)
-print(data.shape)
-print(data)
-x = data[:,0]
-y = data[:,1]
-z = data[:,2]
-print('Médias locais:', end = ' ')
-print(np.mean(x), end = ' ')
-print(np.mean(y), end = ' ')
-print(np.mean(z))
-print('Covariâncias:', end = ' ')
-print(np.cov(x), end = ' ')
-print(np.cov(y), end = ' ')
-print(np.cov(z))
-print('Média global:', end = ' ')
-print(np.mean(data))
+# print(headers)
+# print(data.shape)
+# print(data)
+dataMean = []
+for i in range(5):
+    dataMean.append(0)
+dataCov = []
+for i in range(5):
+    dataCov.append(0)
+square = data
+for i in range(0, 4):
+    dataMean[i] = np.mean(data[:, i])
+    dataCov[i] = np.cov(data[:, i])
+    # print(dataMean[i])
+    # print(dataCov[i])
+    # for j in range(0,4):
+    #     square[i,j] = (data[i,j]-dataMean[i])**2
+    #     print(square[i,j])
+s0 = np.sum(square[:, 0])
+s1 = np.sum(square[:, 1])
+s2 = np.sum(square[:, 2])
+s3 = np.sum(square[:, 3])
+s4 = np.sum(square[:, 4])
+# print(s0)
+# print(s1)
+# print(s2)
+# print(s3)
+# print(s4)
+# print('Médias locais:', end = ' ')
+# print(np.mean(x), end = ' ')
+# print(np.mean(y), end = ' ')
+# print(np.mean(z))
+# print('Covariâncias:', end = ' ')
+# print(np.cov(x), end = ' ')
+# print(np.cov(y), end = ' ')
+# print(np.cov(z))
+# print('Média global:', end = ' ')
+# print(np.mean(data))
 # print(np.sum(x**2))
+
+def hello():
+    label.config(text=str(s0))
+
+window = tk.Tk()
+window.title("Anova")
+
+height = data.shape[0]+1
+width = data.shape[1]+1
+headers = np.array(headers)
+for i in range(width-1):
+    cell = tk.Label(window, text=str(headers[i]))
+    cell.grid(row=0, column=i+1)
+for i in range(1,height):
+    for j in range(1,width):
+        cell = tk.Label(window, text=str(data[i - 1, j - 1]))
+        cell.grid(row=i, column=j)
+
+# b = tk.Button(window, text="Mean", command=hello)
+# b.grid(row=6, column=0)
+cellMeanStr = tk.Label(window,text="Mean:")
+cellMeanStr.grid(row=6, column=0)
+cellMean = tk.Label(window,text=str(dataMean[0]))
+cellMean.grid(row=6, column=1)
+
+
+window.mainloop()
