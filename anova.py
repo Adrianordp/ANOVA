@@ -30,15 +30,17 @@ for i in range(5):
 dataCov = []
 for i in range(5):
     dataCov.append(0)
-square = data
-for i in range(0, 4):
+square = data*0
+squareC = data*0
+for i in range(0, 5):
     dataMean[i] = np.mean(data[:, i])
     dataCov[i] = np.cov(data[:, i])
     # print(dataMean[i])
     # print(dataCov[i])
-    # for j in range(0,4):
-    #     square[i,j] = (data[i,j]-dataMean[i])**2
-    #     print(square[i,j])
+    for j in range(0,5):
+        square[j,i] = (data[j,i]-dataMean[i])**2
+        squareC[j,i] = (data[j,i]-np.mean(dataMean))**2
+        print(square[j,i])
 s0 = np.sum(square[:, 0])
 s1 = np.sum(square[:, 1])
 s2 = np.sum(square[:, 2])
@@ -82,8 +84,17 @@ for i in range(1,height):
 # b.grid(row=6, column=0)
 cellMeanStr = tk.Label(window,text="Mean:")
 cellMeanStr.grid(row=6, column=0)
-cellMean = tk.Label(window,text=str(dataMean[0]))
-cellMean.grid(row=6, column=1)
+cellSosStr = tk.Label(window,text="SoS:")
+cellSosStr.grid(row=7, column=0)
+for i in range(width-1):
+    cellMean = tk.Label(window,text=str(dataMean[i]))
+    cellMean.grid(row=6, column=i+1)
+    cellSos = tk.Label(window,text=str(np.sum(square[:,i])))
+    cellSos.grid(row=7, column=i+1)
 
+cellSosTStr = tk.Label(window, text="SoST:")
+cellSosTStr.grid(row=8, column=0)
+cellSosT = tk.Label(window,text=str(np.sum(square)))
+cellSosT.grid(row=8, column=1)
 
 window.mainloop()
