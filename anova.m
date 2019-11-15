@@ -178,28 +178,37 @@ fprintf('Prazer \t%.2f\t%.2f\t%.2f\t%.2f\n',tableM(6,:))
 bpT = figure;
 boxplot([sA sB sC sD sE sF])
 bpT.Children.Title.String = 'Gráfico de caixa do conjunto completo para cada dimensão.';
-bpT.Children.XTickLabel = {'A' 'B' 'C' 'D' 'E' 'F'}';
+% bpT.Children.XTickLabel = {'A' 'B' 'C' 'D' 'E' 'F'}';
+bpT.Children.XTickLabel = {'Controle de estresse' 'Saúde' 'Sociabilidade' 'Competitividade' 'Estética' 'Prazer'}';
 bpT.Children.XGrid = 'on';
 bpT.Children.YGrid = 'on';
 bpT.Children.YLabel.String = 'Pontuação';
 bpT.Children.XLabel.String = 'Dimensão';
+bpT.Position = [106 240 857 312];
+bpT.Children.YLim = [5 45];
 
 bpH = figure;
 boxplot([sAH sBH sCH sDH sEH sFH])
 bpH.Children.Title.String = 'Gráfico de caixa do grupo masculino para cada dimensão.';
-bpH.Children.XTickLabel = {'A' 'B' 'C' 'D' 'E' 'F'}';
+% bpH.Children.XTickLabel = {'A' 'B' 'C' 'D' 'E' 'F'}';
+bpH.Children.XTickLabel = {'Controle de estresse' 'Saúde' 'Sociabilidade' 'Competitividade' 'Estética' 'Prazer'}';
 bpH.Children.XGrid = 'on';
 bpH.Children.YGrid = 'on';
 bpH.Children.YGrid = 'on';
 bpH.Children.YLabel.String = 'Pontuação';
 bpH.Children.XLabel.String = 'Dimensão';
+bpH.Position = [106 240 857 312];
+bpH.Children.YLim = [5 45];
 
 bpM = figure;
 grid on
 boxplot([sAM sBM sCM sDM sEM sFM])
 bpM.Children.Title.String = 'Gráfico de caixa do grupo feminino para cada dimensão.';
-bpM.Children.XTickLabel = {'A' 'B' 'C' 'D' 'E' 'F'}';
+% bpM.Children.XTickLabel = {'A' 'B' 'C' 'D' 'E' 'F'}';
+bpM.Children.XTickLabel = {'Controle de estresse' 'Saúde' 'Sociabilidade' 'Competitividade' 'Estética' 'Prazer'}';
 bpM.Children.XGrid = 'on';
 bpM.Children.YGrid = 'on';
 bpM.Children.YLabel.String = 'Pontuação';
 bpM.Children.XLabel.String = 'Dimensão';
+bpM.Position = [106 240 857 312];
+bpM.Children.YLim = [5 45];
