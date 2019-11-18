@@ -42,6 +42,42 @@ vM = T(validM+15,1:48);
 vT = [vH;vM];
 % vT = T;
 
+svT = sum((vT-1)/4);
+svTH = sum((vH-1)/4);
+svTM = sum((vM-1)/4);
+Q = zeros(8,6);
+QH = zeros(8,6);
+QM = zeros(8,6);
+for i = 1:8
+    Q(i,:) = svT(6*(i-1)+1:6*i);
+    QH(i,:) = svTH(6*(i-1)+1:6*i);
+    QM(i,:) = svTM(6*(i-1)+1:6*i);
+    f = figure;
+    pie(Q(i,:))
+    si = num2str(i);
+    f.Children.Title.String = ['Gráfico de pizza da questão ' si ' dos questionários válidos.'];
+    legend
+    f.Children(1).String = {'Controle de estresse' 'Saúde' 'Sociabilidade' 'Competitividade' 'Estética' 'Prazer'};
+    f.Children(1).Position = [0.6999    0.6324    0.2973    0.2596];
+    f.Position = [101 235 592 312];
+    f = figure;
+    pie(QH(i,:))
+    si = num2str(i);
+    f.Children.Title.String = ['Gráfico de pizza da questão ' si ' dos questionários válidos masculinos.'];
+    legend
+    f.Children(1).String = {'Controle de estresse' 'Saúde' 'Sociabilidade' 'Competitividade' 'Estética' 'Prazer'};
+    f.Children(1).Position = [0.6999    0.6324    0.2973    0.2596];
+    f.Position = [101 235 592 312];
+    f = figure;
+    pie(QM(i,:))
+    si = num2str(i);
+    f.Children.Title.String = ['Gráfico de pizza da questão ' si ' dos questionários válidos femininos.'];
+    legend
+    f.Children(1).String = {'Controle de estresse' 'Saúde' 'Sociabilidade' 'Competitividade' 'Estética' 'Prazer'};
+    f.Children(1).Position = [0.6999    0.6324    0.2973    0.2596];
+    f.Position = [101 235 592 312];
+end
+
 % nTH = [];
 % for i = 1:validHL
 % %     nTH = [nTH HH{validH(i)}];
